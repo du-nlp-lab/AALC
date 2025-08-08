@@ -207,13 +207,39 @@ class TaskRunner:
             role_worker_mapping[Role.RefPolicy] = ray.remote(ActorRolloutRefWorker)
             mapping[Role.RefPolicy] = global_pool_id
 
-        # Load the reward manager for training and validation.
-        reward_fn = load_reward_manager(
-            config, tokenizer, num_examine=0, **config.reward_model.get("reward_kwargs", {})
-        )
-        val_reward_fn = load_reward_manager(
-            config, tokenizer, num_examine=1, **config.reward_model.get("reward_kwargs", {})
-        )
+        reward_manager_name = config.reward_model.get("reward_manager", "naive")
+        if reward_manager_name == 'naive':
+            from verl.workers.reward_manager import NaiveRewardManager
+            reward_manager_cls = NaiveRewardManager
+        elif reward_manager_name == 'prime':
+            from verl.workers.reward_manager import PrimeRewardManager
+            reward_manager_cls = PrimeRewardManager
+        elif reward_manager_name == 'batch':
+            from verl.workers.reward_manager import BatchRewardManager
+            reward_manager_cls = BatchRewardManager
+        elif reward_manager_name == 'dapo':
+            from verl.workers.reward_manager import DAPORewardManager
+            reward_manager_cls = DAPORewardManager
+        elif reward_manager_name == 'length_reward':
+            from verl.workers.reward_manager import LRRewardManager
+            reward_manager_cls = LRRewardManager
+        else:
+
+            raise NotImplementedError
+
+        compute_score = get_custom_reward_fn(config)
+        reward_kwargs = dict(config.reward_model.get("reward_kwargs", {}))
+        reward_fn = reward_manager_cls(tokenizer=tokenizer,
+                                       num_examine=0,
+                                       compute_score=compute_score,
+                                       reward_fn_key=config.data.reward_fn_key,
+                                       **reward_kwargs)
+
+        # Note that we always use function-based RM for validation
+        val_reward_fn = reward_manager_cls(tokenizer=tokenizer,
+                                           num_examine=1,
+                                           compute_score=compute_score,
+                                           reward_fn_key=config.data.reward_fn_key)
         resource_pool_manager = ResourcePoolManager(resource_pool_spec=resource_pool_spec, mapping=mapping)
 
         from verl.utils.dataset.rl_dataset import collate_fn
