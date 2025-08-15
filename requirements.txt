@@ -10,11 +10,7 @@ dill
 flash-attn
 hydra-core
 liger-kernel
-<<<<<<< HEAD
 numpy==1.26.4
-=======
-numpy<2.0.0
->>>>>>> main
 pandas
 peft
 pyarrow>=19.0.0
@@ -25,11 +21,7 @@ ray[default]
 tensordict>=0.8.0,<=0.9.1,!=0.9.0
 torchdata
 transformers
-<<<<<<< HEAD
 vllm==0.6.3.post1
-=======
-# vllm==0.8.4
->>>>>>> main
 wandb
 packaging>=20.0
 uvicorn
