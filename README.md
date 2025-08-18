@@ -13,18 +13,23 @@ The repo is built based on the verl GitHub repo.
 To set up an environment, please follow the following commands:
 ```bash
 conda create -n lr python==3.10
-pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu126
+conda activate lr
+pip install torch==2.6.0 torchvision==0.21.0
+pip install flash-attn==2.8.2 --no-build-isolation
+
+git clone https://github.com/du-nlp-lab/AALC
+cd AALC
 pip install -r requirements.txt
 pip install -e . --no-deps
 ```
-Please install the torch based on the CUDA version you have on your machine.
 
 If you have the flash-attn related error, please run the following commands:
 ```bash
 pip uninstall flash-attn -y
-pip install flash-attn==2.8.2
+pip cache remove flash_attn
+pip install flash-attn==2.7.4.post1 --no-build-isolation
 ```
-If you have the apex related error, please run the following commands out of the AALC folder:
+If you have the apex related error or want to install apex, please run the following commands out of the AALC folder:
 ```bash
 pip uninstall apex -y
 git clone https://github.com/NVIDIA/apex

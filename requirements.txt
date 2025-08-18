@@ -3,7 +3,6 @@ accelerate
 codetiming
 datasets
 dill
-flash-attn==2.8.2
 hydra-core
 liger-kernel
 numpy==1.26.4
