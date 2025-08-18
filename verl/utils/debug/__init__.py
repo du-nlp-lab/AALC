@@ -12,6 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# APIs kept for backward compatibility purpose
-# For new features please develop in verl/utils/profiler/
-from ..profiler import *  # noqa
+from .performance import log_gpu_memory_usage

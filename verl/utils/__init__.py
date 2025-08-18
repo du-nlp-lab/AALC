@@ -12,8 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from . import config, tokenizer
-from .config import omega_conf_to_dataclass
-from .tokenizer import hf_processor, hf_tokenizer
+from . import tokenizer
+from .tokenizer import hf_tokenizer, hf_processor
 
-__all__ = tokenizer.__all__ + config.__all__ + ["hf_processor", "hf_tokenizer", "omega_conf_to_dataclass"]
+__all__ = tokenizer.__all__

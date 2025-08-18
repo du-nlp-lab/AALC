@@ -14,17 +14,17 @@
 """
 The base class for Actor
 """
-
 from abc import ABC, abstractmethod
-
-import torch
+from typing import Iterable, Dict
 
 from verl import DataProto
+import torch
 
-__all__ = ["BasePPOActor"]
+__all__ = ['BasePPOActor']
 
 
 class BasePPOActor(ABC):
+
     def __init__(self, config):
         """The base class for PPO actor
 
@@ -51,7 +51,7 @@ class BasePPOActor(ABC):
         pass
 
     @abstractmethod
-    def update_policy(self, data: DataProto) -> dict:
+    def update_policy(self, data: DataProto) -> Dict:
         """Update the policy with an iterator of DataProto
 
         Args:
