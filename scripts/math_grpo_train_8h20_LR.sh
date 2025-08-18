@@ -6,7 +6,7 @@ python3 -m verl.trainer.main_ppo \
     data.val_files=$DATA_DIR/test.parquet \
     data.train_batch_size=256 \
     data.max_prompt_length=1024 \
-    data.max_response_length=3072 \
+    data.max_response_length=$RESPONSE_LENGTH \
     data.filter_overlong_prompts=True \
     data.truncation='error' \
     actor_rollout_ref.model.path=$BASE_MODEL \

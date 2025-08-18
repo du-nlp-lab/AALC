@@ -13,10 +13,26 @@ The repo is built based on the verl GitHub repo.
 To set up an environment, please follow the following commands:
 ```bash
 conda create -n lr python==3.10
+pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu126
 pip install -r requirements.txt
 pip install -e . --no-deps
 ```
+Please install the torch based on the CUDA version you have on your machine.
 
+If you have the flash-attn related error, please run the following commands:
+```bash
+pip uninstall flash-attn -y
+pip install flash-attn==2.8.2
+```
+If you have the apex related error, please run the following commands out of the AALC folder:
+```bash
+pip uninstall apex -y
+git clone https://github.com/NVIDIA/apex
+cd apex
+pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+```
+
+## Train and Test Models
 To train a model, please confirm all parameters in the file `train_grpo_math_LR.sh` and then run:
 ```bash
 bash train_grpo_math_LP.sh

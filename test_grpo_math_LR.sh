@@ -1,8 +1,8 @@
 #settings=ori
 SETTINGS=lr
-MODEL_NAME=Qwen/Qwen2.5-Math-1.5B
-MODEL_SHORT_NAME=qwen2.5-math-1.5b
-BASE_DIR=checkpoints/LengthPenalty_Long/math-grpo-qwen2.5-Math-1.5b-8h20-lr
+MODEL_NAME=Qwen/Qwen2.5-Math-7B
+MODEL_SHORT_NAME=qwen2.5-math-7b
+BASE_DIR=checkpoints/LengthPenalty_Long/math-grpo-qwen2.5-math-7b-8h20-lr
 
 DATASET=math
 export DATA_PATH=data/${DATASET}/test.parquet
@@ -11,8 +11,8 @@ export SAVE_PATH=results/${DATASET}/math-train-math-test-${MODEL_SHORT_NAME}-${S
 MODEL_SAVE_DIR="${BASE_DIR}"/merged
 STEPS=(300 )
 for step in "${STEPS[@]}"; do
-    step_dir=global_step_${step}r
-    export MODEL_DIR="${MODEL_SAVE_DIR}"/"${step_di}"
+    step_dir=global_step_${step}
+    export MODEL_DIR="${BASE_DIR}"/"${step_dir}"
 
     python scripts/model_merger.py \
         --backend fsdp \

@@ -163,7 +163,7 @@ class TaskRunner:
         elif reward_manager_name == 'dapo':
             from verl.workers.reward_manager import DAPORewardManager
             reward_manager_cls = DAPORewardManager
-        elif reward_manager_name == 'length_penalty':
+        elif reward_manager_name == 'length_reward':
             from verl.workers.reward_manager import LPRewardManager
             reward_manager_cls = LPRewardManager
         else:
