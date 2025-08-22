@@ -1,13 +1,13 @@
 <h1 style="text-align: center;">AALC: Large Language Model Efficient Reasoning via Adaptive Accuracy-Length Control</h1>
 
 <p align="center">
-  <a href="https://arxiv.org/">Paper</a> ｜ 
+  <a href="https://arxiv.org/abs/2506.20160">Paper</a> ｜ 
   <a href="https://">Blog</a> ｜
-  <a href="https://huggingface.co/">Model</a> ｜
-  <a href="https://huggingface.co/">Data</a>
+  <a href="https://huggingface.co/du-lab">Model</a> ｜
+  <a href="https://huggingface.co/du-lab">Data</a>
 </p>
 
-The repo is built based on the verl GitHub repo.
+The repo is built based on the VERL GitHub repo.
 
 ## Getting Started
 To set up an environment, please follow the following commands:
@@ -29,7 +29,7 @@ pip uninstall flash-attn -y
 pip cache remove flash_attn
 pip install flash-attn==2.7.4.post1 --no-build-isolation
 ```
-If you have the apex related error or want to install apex, please run the following commands out of the AALC folder:
+If you have the apex-related error or want to install apex, please run the following commands out of the AALC folder:
 ```bash
 pip uninstall apex -y
 git clone https://github.com/NVIDIA/apex
@@ -44,6 +44,9 @@ bash train_grpo_math_LP.sh
 ```
 
 To test a checkpoint, the procedure is similar to the training part, but the file is `test_grpo_math_LR.sh`.
+```bash
+bash test_grpo_math_LP.sh
+```
 
 
 ## Citation
