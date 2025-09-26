@@ -84,8 +84,8 @@ class LRRewardManager:
             else:
                 reward = score
 
-            if -1 != validataion_acc:
-                acc_ratio = min(1, validataion_acc/target_acc) # [0,1]
+            if -1 != validation_acc:
+                acc_ratio = min(1, validation_acc/target_acc) # [0,1]
                 alpha = 0.9 + 0.1 * (1 - acc_ratio)
                 length_ratio = min(1, valid_response_length/self.max_length) # [0,1]
                 length_reward = 1 - min(acc_ratio**128, length_ratio)
