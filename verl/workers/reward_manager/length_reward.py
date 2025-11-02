@@ -84,12 +84,27 @@ class LRRewardManager:
             else:
                 reward = score
 
+            # if -1 != validation_acc:
+            #     acc_ratio = min(1, validation_acc/target_acc) # [0,1]
+            #     alpha = 0.9 + 0.1 * (1 - acc_ratio)
+            #     length_ratio = min(1, valid_response_length/self.max_length) # [0,1]
+            #     length_reward = 1 - min(acc_ratio**128, length_ratio)
+            #     reward = reward * alpha + 1e-6 * length_reward
+
+            # new reward
             if -1 != validation_acc:
                 acc_ratio = min(1, validation_acc/target_acc) # [0,1]
                 alpha = 0.9 + 0.1 * (1 - acc_ratio)
-                length_ratio = min(1, valid_response_length/self.max_length) # [0,1]
-                length_reward = 1 - min(acc_ratio**128, length_ratio)
-                reward = reward * alpha + 1e-6 * length_reward
+                # length_ratio = min(1, valid_response_length/self.max_length) # [0,1]
+                # length_reward = 1 - min(acc_ratio**128, length_ratio)
+                # reward = reward * alpha + 1e-6 * length_reward
+
+                # penalty = max(0, )
+                target_length = 1024
+                penalty = (valid_response_length - target_length)/(self.max_length - target_length)
+                penalty = min(0, penalty)
+
+                reward = reward - 1e-6 * length_reward
 
             reward_tensor[i, valid_response_length - 1] = reward
 

@@ -42,6 +42,12 @@ To train a model, please confirm all parameters in the file `train_grpo_math_LR.
 ```bash
 bash train_grpo_math_LP.sh
 ```
+or (if use length penalty)
+
+```bash
+bash train_grpo_math_LP_penalty.sh
+```
+
 
 To test a checkpoint, the procedure is similar to the training part, but the file is `test_grpo_math_LR.sh`.
 ```bash
